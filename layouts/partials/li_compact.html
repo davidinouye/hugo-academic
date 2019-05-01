@@ -63,7 +63,13 @@
 
       {{ if and $show_authors_only $item.Params.authors }}
       <div itemprop="author">
-        {{ partial "page_metadata_authors" $item }}
+        {{- partial "page_metadata_authors" $item -}}.
+        {{ if .Params.publication_short }}
+        {{- .Params.publication_short | markdownify -}},
+        {{ else if .Params.publication }}
+        {{- .Params.publication | markdownify -}},
+        {{ end }}
+        {{- .Date.Format "2006" -}}.
       </div>
       {{ else if not $show_authors_only }}
         {{ partial "page_metadata" (dict "page" $item "is_list" 1) }}
