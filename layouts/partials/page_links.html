@@ -14,6 +14,7 @@
   {{ i18n "btn_preprint" }}
 </a>
 {{ end }}
+
 {{ $pdf := "" }}
 {{ $resource := $page.Resources.GetMatch (printf "%s.pdf" $page.File.ContentBaseName) }}
 {{ with $resource }}
@@ -23,12 +24,12 @@
     {{ $pdf = $page.Params.url_pdf | relURL }}
   {{ end }}
 {{ end }}
-
 {{ with $pdf }}
 <a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ . }}" target="_blank" rel="noopener">
   {{ i18n "btn_pdf" }}
 </a>
 {{ end }}
+
 {{ $resource := $page.Resources.GetMatch "*.bib" }}
 {{ with $resource }}
 <button type="button" class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}} js-cite-modal"
@@ -36,17 +37,22 @@
   {{ i18n "btn_cite" }}
 </button>
 {{ end }}
-{{ with $page.Params.url_code }}
-  {{ $resource := $page.Resources.GetMatch . }}
-  {{ if $resource }}
-    {{ $link = $resource.RelPermalink }}
-  {{ else }}
-    {{ $link = . | relURL }}
+
+{{ $code := "" }}
+{{ $resource := $page.Resources.GetMatch (printf "code-%s.zip" $page.File.ContentBaseName) }}
+{{ with $resource }}
+  {{ $code = .RelPermalink }}
+{{ else }}
+  {{ if $page.Params.url_code }}
+    {{ $code = $page.Params.url_code | relURL }}
   {{ end }}
-<a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ $link }}" target="_blank" rel="noopener">
+{{ end }}
+{{ with $code }}
+<a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ . }}" target="_blank" rel="noopener">
   {{ i18n "btn_code" }}
 </a>
 {{ end }}
+
 {{ with $page.Params.url_dataset }}
   {{ $resource := $page.Resources.GetMatch . }}
   {{ if $resource }}
@@ -75,36 +81,47 @@
 </a>
 {{ end }}
 {{ end }}
-{{ with $page.Params.url_poster }}
-  {{ $resource := $page.Resources.GetMatch . }}
-  {{ if $resource }}
-    {{ $link = $resource.RelPermalink }}
-  {{ else }}
-    {{ $link = . | relURL }}
+
+{{ $poster := "" }}
+{{ $resource := $page.Resources.GetMatch (printf "poster-%s.pdf" $page.File.ContentBaseName) }}
+{{ with $resource }}
+  {{ $poster = .RelPermalink }}
+{{ else }}
+  {{ if $page.Params.url_poster }}
+    {{ $poster = $page.Params.url_poster | relURL }}
   {{ end }}
-<a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ $link }}" target="_blank" rel="noopener">
+{{ end }}
+{{ with $poster }}
+<a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ . }}" target="_blank" rel="noopener">
   {{ i18n "btn_poster" }}
 </a>
 {{ end }}
+
 {{ if $page.Params.slides }}
   {{ with (site.GetPage (printf "slides/%s" $page.Params.slides)) }}
   <a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ .RelPermalink }}" target="_blank">
     {{ i18n "btn_slides" }}
   </a>
   {{ end }}
+
 {{ else }}
-{{ with $page.Params.url_slides }}
-  {{ $resource := $page.Resources.GetMatch . }}
-  {{ if $resource }}
-    {{ $link = $resource.RelPermalink }}
-  {{ else }}
-    {{ $link = . | relURL }}
+{{ $slides := "" }}
+{{ $resource := $page.Resources.GetMatch (printf "slides-%s.pdf" $page.File.ContentBaseName) }}
+{{ with $resource }}
+  {{ $slides = .RelPermalink }}
+{{ else }}
+  {{ if $page.Params.url_slides }}
+    {{ $slides = $page.Params.url_slides | relURL }}
   {{ end }}
-<a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ $link }}" target="_blank" rel="noopener">
+{{ end }}
+{{ with $slides }}
+<a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="{{ . }}" target="_blank" rel="noopener">
   {{ i18n "btn_slides" }}
 </a>
 {{ end }}
+
 {{ end }}
+
 {{ with $page.Params.url_video }}
   {{ $resource := $page.Resources.GetMatch . }}
   {{ if $resource }}
@@ -116,6 +133,7 @@
   {{ i18n "btn_video" }}
 </a>
 {{ end }}
+
 {{ with $page.Params.url_source }}
   {{ $resource := $page.Resources.GetMatch . }}
   {{ if $resource }}
@@ -127,6 +145,7 @@
   {{ i18n "btn_source" }}
 </a>
 {{ end }}
+
 {{ with $page.Params.doi }}
 <a class="btn btn-outline-primary my-1 mr-1{{ if $is_list }} btn-sm{{end}}" href="https://doi.org/{{ . }}" target="_blank" rel="noopener">
   DOI
