@@ -1,3 +1,4 @@
+*.un~
 # IDE specific
 .idea/
 .vscode/
