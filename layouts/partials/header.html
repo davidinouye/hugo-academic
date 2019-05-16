@@ -120,6 +120,16 @@
 
   {{ if not .Site.IsServer }}
   {{ if .Site.GoogleAnalytics }}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51778612-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-51778612-3');
+    </script>
+    <!--
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       ga('create', '{{ .Site.GoogleAnalytics }}', 'auto');
@@ -137,6 +147,7 @@
     {{ if ($scr.Get "use_cdn") }}
     {{ printf "<script async src=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\"></script>" (printf $js.autotrack.url $js.autotrack.version) $js.autotrack.sri | safeHTML }}
     {{ end }}
+    -->
   {{ end }}
   {{ end }}
 
