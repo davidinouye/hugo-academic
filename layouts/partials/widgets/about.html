@@ -92,6 +92,15 @@
       <div class="col-md-7">
         <h3>{{ i18n "education" | markdownify }}</h3>
         <ul class="ul-edu fa-ul">
+          {{ range .appointments }}
+          <li>
+            <i class="fa-li fas fa-school"></i>
+            <div class="description">
+              <p class="course">{{ .title }}{{ with .year }}, {{ . }}{{ end }}</p>
+              <p class="institution">{{ .institution }}</p>
+            </div>
+          </li>
+          {{ end }}
           {{ range .courses }}
           <li>
             <i class="fa-li fas fa-graduation-cap"></i>
