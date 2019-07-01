@@ -39,12 +39,12 @@
 {{ end }}
 
 {{ $code := "" }}
-{{ $resource := $page.Resources.GetMatch (printf "code-%s.zip" $page.File.ContentBaseName) }}
-{{ with $resource }}
-  {{ $code = .RelPermalink }}
+{{ if $page.Params.url_code }}
+  {{ $code = $page.Params.url_code | relURL }}
 {{ else }}
-  {{ if $page.Params.url_code }}
-    {{ $code = $page.Params.url_code | relURL }}
+  {{ $resource := $page.Resources.GetMatch (printf "code-%s.zip" $page.File.ContentBaseName) }}
+  {{ with $resource }}
+    {{ $code = .RelPermalink }}
   {{ end }}
 {{ end }}
 {{ with $code }}
