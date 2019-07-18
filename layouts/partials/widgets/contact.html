@@ -62,9 +62,17 @@
       </li>
       {{ end }}
 
-      {{ with site.Params.address }}
+      {{ with site.Params.office }}
       <li>
         <i class="fa-li fas fa-map-marker fa-2x" aria-hidden="true"></i>
+        <span id="person-office">{{ . | markdownify | emojify }}</span>
+      </li>
+      {{ end }}
+
+
+      {{ with site.Params.address }}
+      <li>
+        <i class="fa-li fas fa-mail-bulk fa-2x" aria-hidden="true"></i>
         <span id="person-address" itemprop="address">{{ . | markdownify | emojify }}</span>
       </li>
       {{ end }}
