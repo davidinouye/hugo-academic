@@ -23,16 +23,11 @@
       {{ end }}
 
       {{ if $schedule }}
-        {{ $schedule = $schedule | absURL }}
-        {{ if eq (substr $schedule 0 1) "/" }}
-          {{ $schedule = (printf "http:%s" $schedule) }}
-        {{ end }}
-
       <h1>Course Schedule (Tenative)</h1>
       <table>
       <tbody>
        {{ $sep := "," }}
-       {{ range $i, $r := getCSV $sep $schedule}}
+       {{ range $i, $r := getCSV $sep "content" $schedule}}
         <tr>
           <td>{{ index $r 0 }}</td>
           <td>{{ index $r 1 }}</td>
