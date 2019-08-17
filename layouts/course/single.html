@@ -29,12 +29,9 @@
        {{ $sep := "," }}
        {{ range $i, $r := getCSV $sep "content" $schedule}}
         <tr>
-          <td>{{ index $r 0 }}</td>
-          <td>{{ index $r 1 }}</td>
-          <td>{{ index $r 2 }}</td>
-          <td>{{ index $r 3 }}</td>
-          <td>{{ index $r 4 }}</td>
-          <td>{{ index $r 5 }}</td>
+          {{ range $j, $v := $r }}
+          <td>{{ $v | safeHTML }}</td>
+          {{ end }}
         </tr>
       {{ end }}
       </tbody>
