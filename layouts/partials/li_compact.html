@@ -31,7 +31,14 @@
   <div class="media-body">
 
     <h3 class="article-title mb-0 mt-0" itemprop="name">
-      <a href="{{ $item.RelPermalink }}" itemprop="url">{{ $item.Title }}</a>
+      <a href="{{ $item.RelPermalink }}" itemprop="url">
+        {{ $t := (time $item.Date) }}
+        {{ $prior_time := (now.AddDate 0 -6 0) }}
+        {{ if $t.After $prior_time }}
+        <span style="font-weight: normal; font-size: 70%; vertical-align: top;">(New!)</span>
+        {{ end }}
+        {{ $item.Title }}
+      </a>
     </h3>
 
     {{ with $summary }}
