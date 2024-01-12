@@ -37,6 +37,10 @@
   {{ $archive_page = site.GetPage (printf "tags/%s" $st.Params.content.filters.exclude_tag) }}
   {{ $query = $query | complement $archive_page.Pages }}
 {{ end }}
+{{ if $st.Params.content.filters.exclude_tag_two }}
+  {{ $archive_page = site.GetPage (printf "tags/%s" $st.Params.content.filters.exclude_tag_two) }}
+  {{ $query = $query | complement $archive_page.Pages }}
+{{ end }}
 {{ if $st.Params.content.filters.exclude_past }}
   {{ $query = where $query "Date" ">=" now }}
 {{ end }}
