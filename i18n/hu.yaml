@@ -55,6 +55,9 @@
 - id: btn_project
   translation: Projekt
 
+- id: btn_demo
+  translation: Demó
+
 - id: btn_poster
   translation: Poszter
 

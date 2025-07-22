@@ -26,6 +26,9 @@
 - id: btn_project
   translation: Projeto
 
+- id: btn_demo
+  translation: Demonstração
+
 # About widget
 
 - id: interests

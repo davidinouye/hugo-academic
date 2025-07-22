@@ -55,6 +55,9 @@
 - id: btn_project
   translation: 项目
 
+- id: btn_demo
+  translation: 演示
+
 - id: btn_poster
   translation: 海报
 
