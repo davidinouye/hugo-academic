@@ -1,0 +1,7 @@
+{{/* Check if the link destination ends with .ipynb */}}
+{{- if strings.HasSuffix .Destination ".ipynb" -}}
+  <a href="{{ .Destination | safeURL }}" download>{{ .Text | safeHTML }}</a>
+{{- else -}}
+  {{/* For all other links, render a standard anchor tag */}}
+  <a href="{{ .Destination | safeURL }}">{{ .Text | safeHTML }}</a>
+{{- end -}}
