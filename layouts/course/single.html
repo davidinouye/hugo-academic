@@ -27,7 +27,7 @@
       <table>
       <tbody>
        {{ $sep := "," }}
-       {{ range $i, $r := getCSV $sep "content" $schedule}}
+       {{ range $i, $r := transform.Unmarshal (dict "delimiter" $sep) (os.ReadFile (print "content" $schedule))}}
         <tr>
           {{ range $j, $v := $r }}
           <td>{{ $v | safeHTML }}</td>
